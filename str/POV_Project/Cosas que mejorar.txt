@@ -1,0 +1,10 @@
+  Period_Suspension
+    Tiempo_Cero debería ser Tiempo_Viejo
+  Drive_All_Bars
+    Se debe iterar de 120 a 239. Haciéndolo de 120 a 240 son 121 grados.
+  Display_Static_Text
+    Inicialización de Dots en Translate_String: mejor inicializar con (others => 0) que el bucle que implementas.
+    Translate_String, el bucle debería acabar en min(20,Text'Length).
+  Display_With_Scroll
+    Es innecesario el bloque anidado. Basta con un solo bloque.
+    Solo haces una pasada del texto.

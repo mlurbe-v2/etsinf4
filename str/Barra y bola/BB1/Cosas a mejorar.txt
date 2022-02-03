@@ -1,0 +1,12 @@
+- Travel_Times y Travel_Times_Opt
+  · Los valores de error están en segundos, no en ms como correspondería.
+  · La variable Posicion no tiene utilidad.
+  · En la versión Opt, no explotáis la simetría del problema ya que en cada planeta solo hay que cambiar el signo del ángulo que aplicar y de la posición que alcanzar. En vez de eso, repetís código muy similar en el "if".
+
+- BB_PD_Control
+  · La primera vez que se lee, lastError no está inicializada.
+  · Conviene inicializar kpLoc y kdLoc a cero, para evitar sorpresas si un cliente llama a Calculate_Action antes que a Configure_PD.
+
+- Seven_Targets
+  · En Controller, la inicialización Next := Clock debería ser tras el accept Start, ya que no sabemos cuándo se llamará a esa entry.
+  · El controlador no está sobreamortiguado con los parámetros que proponéis.

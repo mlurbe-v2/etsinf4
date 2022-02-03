@@ -1,0 +1,13 @@
+- BB_PD_Control
+  · Defectos de BB1: lastError, kpLoc y kdLoc no inicializadas.
+
+- Control_With_Filters
+  · Los filtros no están bien calculados. En Filter_80:
+     media := 0.8*hist + 0.2*ADC, y después
+     filtrado = 0.8*media + 0.2*ADC
+  con lo que el filtrado en realidad está dando peso 0.64 al histórico y 0.36 al ADC, ya que:
+     filtrado = 0.8*(0.8*hist + 0.2*ADC) + 0.2*ADC  (sustituyendo media)
+  El cálculo que hacer en Filter_80 es:
+     histórico = 0.8*histórico + 0.2*ADC
+  y el filtro ha de retornar ADC_To_Position del nuevo histórico.
+  Por la misma causa, el filtro 50/50 que calculáis es en realidad 25/75. 
