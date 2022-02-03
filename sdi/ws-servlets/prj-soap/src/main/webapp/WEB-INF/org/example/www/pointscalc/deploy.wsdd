@@ -1,0 +1,26 @@
+<!-- Use this file to deploy some handlers/chains and services      -->
+<!-- Two ways to do this:                                           -->
+<!--   java org.apache.axis.client.AdminClient deploy.wsdd          -->
+<!--      after the axis server is running                          -->
+<!-- or                                                             -->
+<!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   -->
+<!--      from the same directory that the Axis engine runs         -->
+
+<deployment
+    xmlns="http://xml.apache.org/axis/wsdd/"
+    xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from pointscalc WSDL service -->
+
+  <service name="pointscalcSOAP" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://www.example.org/pointscalc/"/>
+      <parameter name="wsdlServiceElement" value="pointscalc"/>
+      <parameter name="schemaUnqualified" value="http://www.example.org/pointscalc/"/>
+      <parameter name="wsdlServicePort" value="pointscalcSOAP"/>
+      <parameter name="className" value="org.example.www.pointscalc.PointscalcSOAPSkeleton"/>
+      <parameter name="wsdlPortType" value="pointscalc"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <parameter name="allowedMethods" value="*"/>
+
+  </service>
+</deployment>

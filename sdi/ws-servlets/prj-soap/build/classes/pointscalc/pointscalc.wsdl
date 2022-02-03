@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://www.example.org/pointscalc/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="pointscalc" targetNamespace="http://www.example.org/pointscalc/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://www.example.org/pointscalc/">
+      <xsd:element name="PointsToMoney" type="tns:PointsToMoneyType">
+
+      </xsd:element>
+      <xsd:element name="PointsToMoneyResponse"
+      	type="tns:PointsToMoneyResponseType">
+
+      </xsd:element>
+
+      <xsd:complexType name="PointsToMoneyType">
+      	<xsd:sequence>
+      		<xsd:element name="points" type="xsd:int"></xsd:element>
+      		<xsd:element name="name" type="xsd:string"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    
+      <xsd:complexType name="PointsToMoneyResponseType">
+      	<xsd:sequence>
+      		<xsd:element name="out" type="xsd:string"></xsd:element>
+      	</xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="PointsToMoneyRequest">
+    <wsdl:part element="tns:PointsToMoney" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="PointsToMoneyResponse">
+    <wsdl:part element="tns:PointsToMoneyResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="pointscalc">
+    <wsdl:operation name="PointsToMoney">
+      <wsdl:input message="tns:PointsToMoneyRequest"/>
+      <wsdl:output message="tns:PointsToMoneyResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="pointscalcSOAP" type="tns:pointscalc">
+  	<soap:binding style="document"
+  		transport="http://schemas.xmlsoap.org/soap/http" />
+  	<wsdl:operation name="PointsToMoney">
+  		<soap:operation
+  			soapAction="http://www.example.org/pointscalc/PointsToMoney" />
+  		<wsdl:input>
+  			<soap:body use="literal" />
+  		</wsdl:input>
+  		<wsdl:output>
+  			<soap:body use="literal" />
+  		</wsdl:output>
+  	</wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="pointscalc">
+    <wsdl:port binding="tns:pointscalcSOAP" name="pointscalcSOAP">
+      <soap:address location="http://www.example.org/"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

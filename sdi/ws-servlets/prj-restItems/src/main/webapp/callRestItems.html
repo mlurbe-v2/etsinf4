@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>SDI REST Example</title>
+</head>
+<body>
+
+<h1>Calling REST from Javascript.</h1>
+<hr> <br>
+<form id="callForm" action="">
+Base URL: <input type="text" name="baseURL" value ="http://localhost:8080/prj-restItems/rest/items" size="50"> <br> <br>
+Accepted Type: <input type="text" name="acceptedType" value ="application/json">       
+<button type="Button" onclick="getAllItems()">Get Items</button> <br> <br>
+</form>
+
+<hr> <br>
+<strong>Item operations...</strong>
+<form id="itemOperationsForm" action="">
+Item identifier: <input type="text" name="ID" > 
+<button type="Button" onclick="getItem()">Get Item</button> 
+<button type="Button" onclick="deleteItem()">Delete Item</button> <br> <br>
+Item amount to operate: <input type="text" name="itemAmount" value="1"> <br> <br>
+<button type="Button" onclick="decItem()">Decrement Item amount</button> 
+<button type="Button" onclick="incItem()">Increment Item amount</button> <br> <br>
+</form> 
+
+<hr> <br>
+
+<strong>Adding items...</strong>
+<form id="newItemForm" action="">
+Item identifier: <input type="text" name="identifier" > <br>
+Item description: <input type="text" name="description" > <br>
+Initial amount: <input type="text" name="amount" value="1"> <br> <br>
+<button type="Button" onclick="newItem()">New Item</button> 
+</form> 
+<hr> <br>
+
+<hr> 
+<p id="result"> Here the synchronous results </p>
+<hr>
+
+<script>
+var baseURL = "http://localhost:8080/prj-restItems/rest/items";
+var acceptMIME = "application/json"; 
+var id = "REF00001";
+
+function getFormValues() {
+	id = document.getElementById("itemOperationsForm").elements["ID"].value;
+	baseURL = document.getElementById("callForm").elements["baseURL"].value;
+	acceptMIME = document.getElementById("callForm").elements["acceptedType"].value;
+}
+
+
+function getAllItems() {
+	getFormValues();
+	xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	document.getElementById("result").innerHTML = xmlHttp.responseText;
+	     }
+	 };
+    xmlHttp.open( "GET", baseURL, true );
+    xmlHttp.setRequestHeader ("Accept", acceptMIME);
+    xmlHttp.send();
+}
+
+function getItem() {
+	getFormValues();
+	xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	document.getElementById("result").innerHTML = xmlHttp.responseText;
+	     }
+	 };
+    xmlHttp.open( "GET", baseURL+"/"+id, true );
+    xmlHttp.setRequestHeader ("Accept", acceptMIME);
+    xmlHttp.send();
+}
+
+function decItem() { 
+	var amount = document.getElementById("itemOperationsForm").elements["itemAmount"].value;
+	getFormValues();
+    xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	document.getElementById("result").innerHTML = "item decremented." + " Return status: "+xmlHttp.status;
+	     }
+	 };
+    xmlHttp.open( "PUT",  baseURL+"/"+id+"/dec", true );
+    xmlHttp.send(amount);
+}
+
+function incItem() { 
+	var amount = document.getElementById("itemOperationsForm").elements["itemAmount"].value; 
+	getFormValues();
+    xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	document.getElementById("result").innerHTML = "item incremented." + " Return status: "+xmlHttp.status;
+	     }
+	 };
+    xmlHttp.open( "PUT",  baseURL+"/"+id+"/inc", true );
+    xmlHttp.send( amount );
+}
+
+function newItem() { 
+	var myForm = document.getElementById("newItemForm"); 
+	var identifier = myForm.elements["identifier"].value;
+	var description = myForm.elements["description"].value;
+	var myAmount = myForm.elements["amount"].value;
+	getFormValues();
+    xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	document.getElementById("result").innerHTML = "New item: " + identifier;
+	     }
+	 };
+    xmlHttp.open( "POST",  baseURL, true );
+    xmlHttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlHttp.send( "id="+identifier+"&description="+description+"&amount="+myAmount );
+}
+
+function deleteItem() { 	
+	getFormValues();
+	xmlHttp = new XMLHttpRequest();
+	xmlHttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200) {
+	    	document.write("item removal." + " Return status: "+xmlHttp.status);
+	     }
+	 };
+    xmlHttp.open( "DELETE", baseURL+"/"+id, false );
+    xmlHttp.send( null );
+}
+
+</script>
+
+</body>
+</html> 

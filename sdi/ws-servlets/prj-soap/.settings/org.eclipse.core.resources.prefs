@@ -1,0 +1,11 @@
+eclipse.preferences.version=1
+encoding//src/main/java/com/dataaccess/www/webservicesserver/NumberConversion.java=UTF-8
+encoding//src/main/java/com/dataaccess/www/webservicesserver/NumberConversionLocator.java=UTF-8
+encoding//src/main/java/com/dataaccess/www/webservicesserver/NumberConversionSoapBindingStub.java=UTF-8
+encoding//src/main/java/com/dataaccess/www/webservicesserver/NumberConversionSoapType.java=UTF-8
+encoding//src/main/java/org/example/www/pointscalc/PointscalcSOAPImpl.java=UTF-8
+encoding//src/main/java/org/example/www/pointscalc/PointscalcSOAPSkeleton.java=UTF-8
+encoding//src/main/java/org/example/www/pointscalc/PointscalcSOAPStub.java=UTF-8
+encoding//src/main/java/org/example/www/pointscalc/Pointscalc_PortType.java=UTF-8
+encoding//src/main/java/org/example/www/pointscalc/Pointscalc_Service.java=UTF-8
+encoding//src/main/java/org/example/www/pointscalc/Pointscalc_ServiceLocator.java=UTF-8

@@ -1,0 +1,6 @@
+module corba {
+interface Echo {
+// Methods
+string echoService(in string input);
+};
+}; 
